@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal academic homepage — Information Engineering" />
+  <title>张三 | 信息工程</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/index-DMmyH84h.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-4PtmFF74.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#hero" class="navbar__logo" data-i18n="hero.name">张三</a>
+      <nav class="navbar__links">
+        <a href="#about" data-i18n="nav.about">关于</a>
+        <a href="#projects" data-i18n="nav.projects">项目</a>
+        <a href="#research" data-i18n="nav.research">研究</a>
+        <a href="#awards" data-i18n="nav.awards">获奖</a>
+        <a href="#skills" data-i18n="nav.skills">技能</a>
+        <a href="#experience" data-i18n="nav.experience">经历</a>
+        <a href="#contact" data-i18n="nav.contact">联系</a>
+      </nav>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">EN</button>
+    </div>
+  </header>
+
+  <!-- 首屏 -->
+  <section class="hero" id="hero">
+    <div class="container hero__inner">
+      <div class="hero__avatar">
+        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='320'%20height='320'%20viewBox='0%200%20320%20320'%3e%3crect%20fill='%23e9ecef'%20width='320'%20height='320'/%3e%3ccircle%20cx='160'%20cy='120'%20r='50'%20fill='%23adb5bd'/%3e%3cellipse%20cx='160'%20cy='260'%20rx='80'%20ry='60'%20fill='%23adb5bd'/%3e%3c/svg%3e" alt="" width="160" height="160" />
+      </div>
+      <div class="hero__info">
+        <h1 class="hero__name" data-i18n="hero.name">张三</h1>
+        <p class="hero__major" data-i18n="hero.major">信息工程</p>
+        <p class="hero__tagline" data-i18n="hero.tagline">热爱信号处理与嵌入式系统，期望在智能感知方向深入探索。</p>
+        <div class="hero__actions">
+          <a href="/resume.pdf" class="btn btn--primary" data-i18n="hero.resumeBtn" download>下载简历</a>
+          <a href="#contact" class="btn btn--outline" data-i18n="hero.contactBtn">联系我</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section__title" data-i18n="about.title">关于我</h2>
+      <div class="about__content" id="aboutContent"></div>
+    </div>
+  </section>
+
+  <!-- 项目 -->
+  <section class="section section--alt" id="projects">
+    <div class="container">
+      <h2 class="section__title" data-i18n="projects.title">项目经历</h2>
+      <div class="projects__grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- 研究 -->
+  <section class="section" id="research">
+    <div class="container">
+      <h2 class="section__title" data-i18n="research.title">研究成果</h2>
+      <div class="research__list" id="researchList"></div>
+    </div>
+  </section>
+
+  <!-- 获奖 -->
+  <section class="section section--alt" id="awards">
+    <div class="container">
+      <h2 class="section__title" data-i18n="awards.title">竞赛奖项</h2>
+      <div class="timeline" id="awardsTimeline"></div>
+    </div>
+  </section>
+
+  <!-- 技能 -->
+  <section class="section" id="skills">
+    <div class="container">
+      <h2 class="section__title" data-i18n="skills.title">专业技能</h2>
+      <div class="skills__grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- 经历 -->
+  <section class="section section--alt" id="experience">
+    <div class="container">
+      <h2 class="section__title" data-i18n="experience.title">教育 & 经历</h2>
+      <div class="timeline" id="experienceTimeline"></div>
+    </div>
+  </section>
+
+  <!-- 联系 -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section__title" data-i18n="contact.title">联系方式</h2>
+      <div class="contact__list" id="contactList"></div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 <span data-i18n="hero.name">张三</span></p>
+    </div>
+  </footer>
+
+</body>
+</html>
