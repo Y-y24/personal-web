@@ -9,6 +9,7 @@
   --color-tag-bg: #e9ecef;
   --color-border: #dee2e6;
   --color-navbar-bg: rgba(255, 255, 255, 0.95);
+  --color-text-on-accent: #ffffff;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', 'PingFang SC', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -54,6 +55,12 @@ a:hover {
   color: var(--color-accent-hover);
 }
 
+a:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -87,17 +94,17 @@ p + p {
   font-weight: 500;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn--primary {
   background-color: var(--color-accent);
-  color: #fff;
+  color: var(--color-text-on-accent);
 }
 
 .btn--primary:hover {
   background-color: var(--color-accent-hover);
-  color: #fff;
+  color: var(--color-text-on-accent);
 }
 
 .btn--outline {
@@ -108,7 +115,7 @@ p + p {
 
 .btn--outline:hover {
   background-color: var(--color-accent);
-  color: #fff;
+  color: var(--color-text-on-accent);
 }
 
 /* === Footer === */
@@ -117,4 +124,15 @@ p + p {
   padding: 32px 0;
   color: var(--color-text-muted);
   font-size: 0.875rem;
+}
+
+/* === Accessibility === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
 }
