@@ -4,6 +4,8 @@ import { getData, t } from './i18n.js';
  * 渲染所有动态内容区域
  */
 export function renderAll() {
+  const data = getData();
+  if (!data) return;
   renderAbout();
   renderProjects();
   renderResearch();
@@ -116,6 +118,7 @@ function renderContact() {
 
 /** 基本的 HTML 转义，防 XSS */
 function escapeHtml(str) {
+  if (str == null) return '';
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
