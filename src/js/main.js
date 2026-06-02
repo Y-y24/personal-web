@@ -3,7 +3,12 @@ import { renderAll, updateStaticText } from './render.js';
 
 async function boot() {
   // 1. 初始化 i18n（加载数据、读取语言偏好）
-  await initI18n('zh');
+  const result = await initI18n('zh');
+  if (!result.ok) {
+    const langBtn = document.getElementById('langToggle');
+    if (langBtn) langBtn.disabled = true;
+    return;
+  }
 
   // 2. 首次渲染
   renderAll();
@@ -46,19 +51,24 @@ function updateLangBtnText() {
 function highlightNavOnScroll() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.navbar__links a');
+  let ticking = false;
 
   window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-      const top = section.offsetTop - 100;
-      if (window.scrollY >= top) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-    });
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        let current = '';
+        sections.forEach(section => {
+          if (window.scrollY >= section.offsetTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 }
 

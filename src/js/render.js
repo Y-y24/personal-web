@@ -24,7 +24,10 @@ export function updateStaticText() {
     }
   });
   // 更新 HTML lang 属性
-  document.documentElement.lang = getData().lang;
+  const data = getData();
+  if (data) {
+    document.documentElement.lang = data.lang;
+  }
 }
 
 function renderAbout() {

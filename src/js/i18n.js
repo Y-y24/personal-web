@@ -23,11 +23,11 @@ export async function initI18n(defaultLang = 'zh') {
 
     DATA.zh = zh;
     DATA.en = en;
+    return { ok: true };
   } catch (err) {
     console.error('i18n initialization failed:', err);
+    return { ok: false, error: err };
   }
-
-  return currentLang;
 }
 
 export function getLang() {
