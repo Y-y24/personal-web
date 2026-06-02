@@ -109,8 +109,6 @@
   },
   "contact": {
     "title": "Contact",
-    "email": "zhangsan@example.com",
-    "github": "https://github.com/username",
     "items": [
       { "label": "Email", "value": "zhangsan@example.com", "link": "mailto:zhangsan@example.com" },
       { "label": "GitHub", "value": "github.com/username", "link": "https://github.com/username" }
