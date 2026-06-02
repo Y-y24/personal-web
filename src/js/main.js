@@ -1,4 +1,4 @@
-import { initI18n, toggleLang, getLang } from './i18n.js';
+import { initI18n, toggleLang, getLang, t } from './i18n.js';
 import { renderAll, updateStaticText } from './render.js';
 
 async function boot() {
@@ -7,7 +7,7 @@ async function boot() {
   if (!result.ok) {
     const langBtn = document.getElementById('langToggle');
     if (langBtn) langBtn.disabled = true;
-    const tagline = document.querySelector('.hero__tagline');
+    const tagline = document.querySelector('.sidebar__tagline');
     if (tagline) {
       tagline.textContent = 'Sorry, the page content could not be loaded. Please refresh or try again later.';
       tagline.style.color = '#dc3545';
@@ -15,10 +15,13 @@ async function boot() {
     return;
   }
 
-  // 2. 首次渲染
+  // 2. 更新页面标题
+  document.title = t('hero.name') + ' | ' + t('hero.major');
+
+  // 3. 首次渲染
   renderAll();
 
-  // 3. 设置语言切换按钮
+  // 4. 设置语言切换按钮
   const langBtn = document.getElementById('langToggle');
   if (langBtn) {
     updateLangBtnText();
@@ -27,22 +30,32 @@ async function boot() {
       updateLangBtnText();
       renderAll();
       updateStaticText();
+      document.title = t('hero.name') + ' | ' + t('hero.major');
     });
   }
 
-  // 4. 平滑滚动导航（点击锚点链接）
-  document.querySelectorAll('.navbar__links a').forEach(link => {
+  // 5. 平滑滚动导航（点击锚点链接）
+  document.querySelectorAll('.content-nav a').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = link.getAttribute('href').slice(1);
       const target = document.getElementById(targetId);
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        const mainContent = document.getElementById('mainContent');
+        if (mainContent) {
+          mainContent.scrollTo({ top: target.offsetTop - 20, behavior: 'smooth' });
+        }
       }
     });
   });
 
-  // 5. 滚动高亮当前导航项
+  // 6. 设置版权年份
+  const yearEl = document.getElementById('copyrightYear');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+
+  // 7. 滚动高亮当前导航项
   highlightNavOnScroll();
 }
 
@@ -54,16 +67,19 @@ function updateLangBtnText() {
 }
 
 function highlightNavOnScroll() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.navbar__links a');
+  const mainContent = document.getElementById('mainContent');
+  const sections = document.querySelectorAll('#mainContent section[id]');
+  const navLinks = document.querySelectorAll('.content-nav a');
   let ticking = false;
 
-  window.addEventListener('scroll', () => {
+  if (!mainContent) return;
+
+  mainContent.addEventListener('scroll', () => {
     if (!ticking) {
       requestAnimationFrame(() => {
         let current = '';
         sections.forEach(section => {
-          if (window.scrollY >= section.offsetTop - 100) {
+          if (mainContent.scrollTop + 80 >= section.offsetTop) {
             current = section.getAttribute('id');
           }
         });
