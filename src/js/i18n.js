@@ -41,6 +41,7 @@ export function setLang(lang) {
   }
   currentLang = lang;
   localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
   return true;
 }
 
