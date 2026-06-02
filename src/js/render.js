@@ -31,17 +31,17 @@ export function updateStaticText() {
 }
 
 function renderAbout() {
-  const data = getData().about;
+  const section = getData()?.about;
   const container = document.getElementById('aboutContent');
-  if (!container) return;
-  container.innerHTML = data.paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+  if (!section || !container) return;
+  container.innerHTML = section.paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
 }
 
 function renderProjects() {
-  const data = getData().projects;
+  const section = getData()?.projects;
   const grid = document.getElementById('projectsGrid');
-  if (!grid) return;
-  grid.innerHTML = data.items.map(item => `
+  if (!section || !grid) return;
+  grid.innerHTML = section.items.map(item => `
     <div class="project-card">
       <h3 class="project-card__title">${escapeHtml(item.title)}</h3>
       <p class="project-card__desc">${escapeHtml(item.description)}</p>
@@ -54,10 +54,10 @@ function renderProjects() {
 }
 
 function renderResearch() {
-  const data = getData().research;
+  const section = getData()?.research;
   const list = document.getElementById('researchList');
-  if (!list) return;
-  list.innerHTML = data.items.map(item => `
+  if (!section || !list) return;
+  list.innerHTML = section.items.map(item => `
     <div class="research__item">
       <h3>${escapeHtml(item.title)}</h3>
       <p class="research__venue">${escapeHtml(item.venue)}</p>
@@ -68,10 +68,10 @@ function renderResearch() {
 }
 
 function renderAwards() {
-  const data = getData().awards;
+  const section = getData()?.awards;
   const container = document.getElementById('awardsTimeline');
-  if (!container) return;
-  container.innerHTML = data.items.map(item => `
+  if (!section || !container) return;
+  container.innerHTML = section.items.map(item => `
     <div class="timeline__item">
       <p class="timeline__date">${escapeHtml(item.date)}</p>
       <p class="timeline__title">${escapeHtml(item.name)} — <strong>${escapeHtml(item.level)}</strong></p>
@@ -81,10 +81,10 @@ function renderAwards() {
 }
 
 function renderSkills() {
-  const data = getData().skills;
+  const section = getData()?.skills;
   const grid = document.getElementById('skillsGrid');
-  if (!grid) return;
-  grid.innerHTML = data.categories.map(cat => `
+  if (!section || !grid) return;
+  grid.innerHTML = section.categories.map(cat => `
     <div class="skills__category">
       <h3>${escapeHtml(cat.name)}</h3>
       <div class="skills__tags">
@@ -95,10 +95,10 @@ function renderSkills() {
 }
 
 function renderExperience() {
-  const data = getData().experience;
+  const section = getData()?.experience;
   const container = document.getElementById('experienceTimeline');
-  if (!container) return;
-  container.innerHTML = data.items.map(item => `
+  if (!section || !container) return;
+  container.innerHTML = section.items.map(item => `
     <div class="timeline__item">
       <p class="timeline__date">${escapeHtml(item.date)}</p>
       <p class="timeline__title">${escapeHtml(item.title)}</p>
@@ -108,10 +108,10 @@ function renderExperience() {
 }
 
 function renderContact() {
-  const data = getData().contact;
+  const section = getData()?.contact;
   const container = document.getElementById('contactList');
-  if (!container) return;
-  container.innerHTML = data.items.map(item => `
+  if (!section || !container) return;
+  container.innerHTML = section.items.map(item => `
     <div class="contact__item">
       <span class="contact__label">${escapeHtml(item.label)}</span>
       <a href="${escapeHtml(item.link)}">${escapeHtml(item.value)}</a>

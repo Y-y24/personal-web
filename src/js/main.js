@@ -7,6 +7,11 @@ async function boot() {
   if (!result.ok) {
     const langBtn = document.getElementById('langToggle');
     if (langBtn) langBtn.disabled = true;
+    const tagline = document.querySelector('.hero__tagline');
+    if (tagline) {
+      tagline.textContent = 'Sorry, the page content could not be loaded. Please refresh or try again later.';
+      tagline.style.color = '#dc3545';
+    }
     return;
   }
 
