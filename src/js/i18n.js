@@ -6,14 +6,26 @@ export async function initI18n(defaultLang = 'zh') {
   // 读取 localStorage 或使用默认语言
   currentLang = localStorage.getItem('lang') || defaultLang;
 
-  // 并行加载双语数据
-  const [zh, en] = await Promise.all([
-    fetch('/data/zh.json').then(r => r.json()),
-    fetch('/data/en.json').then(r => r.json()),
-  ]);
+  try {
+    // 并行加载双语数据
+    const responses = await Promise.all([
+      fetch('/data/zh.json'),
+      fetch('/data/en.json'),
+    ]);
 
-  DATA.zh = zh;
-  DATA.en = en;
+    for (const r of responses) {
+      if (!r.ok) {
+        throw new Error(`Failed to load i18n data: ${r.url} returned ${r.status}`);
+      }
+    }
+
+    const [zh, en] = await Promise.all(responses.map(r => r.json()));
+
+    DATA.zh = zh;
+    DATA.en = en;
+  } catch (err) {
+    console.error('i18n initialization failed:', err);
+  }
 
   return currentLang;
 }
@@ -23,9 +35,13 @@ export function getLang() {
 }
 
 export function setLang(lang) {
-  if (lang !== 'zh' && lang !== 'en') return;
+  if (lang !== 'zh' && lang !== 'en') {
+    console.warn(`setLang: invalid language "${lang}"`);
+    return false;
+  }
   currentLang = lang;
   localStorage.setItem('lang', lang);
+  return true;
 }
 
 export function toggleLang() {
