@@ -9,8 +9,8 @@ export async function initI18n(defaultLang = 'zh') {
   try {
     // 并行加载双语数据
     const responses = await Promise.all([
-      fetch('/data/zh.json'),
-      fetch('/data/en.json'),
+      fetch('data/zh.json'),
+      fetch('data/en.json'),
     ]);
 
     for (const r of responses) {
